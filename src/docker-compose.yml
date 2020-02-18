@@ -1,0 +1,73 @@
+verison:"3"
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.1/24
+    
+services:
+
+    sql.data: 
+        image: postgres
+        networks: 
+            -default
+    nosql.data: 
+        image: mongo
+        networks: 
+            -default
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+        networks: 
+            -default
+    catalog:
+        image: ${REGISTRY:-eshop}/catalog:${PLATFORM:-linux}-${TAG:-latest}
+        build: src/Services/CatalogService/Dockerfile
+        networks: 
+            -default
+        depend_on:
+            - nosql.data
+            - rabbitmq
+                
+    stock:
+        image: ${REGISTRY:-eshop}/stock:${PLATFORM:-linux}-${TAG:-latest}
+        build: src/Services/StockService/Dockerfile
+        depend_on:
+            - nosql.data
+            - rabbitmq
+        networks: 
+            -default 
+            
+    websiteapigw:
+        image: ${REGISTRY:-eshop}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
+        build: src/ApiGateways/ApiGw-Base/Dockerfile
+        depends_on:
+          - nosql.data
+          - sql.data
+          - rabbitmq
+          - catalog
+          - stock
+        networks: 
+            -default
+            
+    websiteagg:
+        image:${REGISTRY:-eshop}/websitegagg:${PLATFORM:-linux}-${TAG:-latest}
+        build: src/ApiGateways/Web.Bff.Shopping/aggregator/Dockerfile
+        networks: 
+            -default
+        depend_on:
+            - sql.data
+            - nosql.data
+            - rabbitmq
+            - catalog
+            - stock
+            
+    website: 
+        image: ${REGISTRY: -eshop}/website:${PLATFORM:-linux}-${TAG:-latest}
+        build: src/Web/Website/Dockerfile
+        networks: 
+            -default
+        depends_on:
+            -websiteagg
+            -websiteapigw
