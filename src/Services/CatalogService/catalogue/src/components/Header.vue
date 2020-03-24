@@ -54,6 +54,7 @@ body {
     height: 100%;
     background-color: #4b4276;
     padding: 30px 0;
+    z-index: 1;
 }
 
 .sidebar img {
@@ -85,6 +86,7 @@ body {
     background-color: #4b4276;
     margin-left: 200px;
     display: block;
+    z-index: 1;
 }
 
 .headBar h2 {

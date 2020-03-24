@@ -214,6 +214,7 @@ body{
     background-color: #39393b;
     cursor: pointer;
     transition: all 0.3s ease 0s;
+    z-index: 0;
 }
 
 .card:hover {
@@ -254,6 +255,10 @@ body{
     padding: 5px 20px;
     background-color: #303032;
     border-radius: 20px;
+}
+
+.card__bPanier:hover {
+    background-color: #4a6e55;
 }
 
 @media only screen and (max-width: 1000px) {
