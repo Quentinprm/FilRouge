@@ -2,8 +2,8 @@
     <div>
         <div class="headBar">
             <h2>Voir tout</h2>
-            <i class="fas fa-search"></i>
-            <i class="fas fa-shopping-bag"></i>
+            <font-awesome-icon class="icon" icon="search" />
+            <font-awesome-icon class="icon" icon="shopping-bag" />
         </div>
         <div class="sidebar">
             <img src="../assets/logoB.png">
@@ -81,15 +81,16 @@ body {
 .headBar {
     position: fixed;
     width: 100%;
-    height: 10%;
+    height: 90px;
     background-color: #4b4276;
     margin-left: 200px;
+    display: block;
 }
 
 .headBar h2 {
-    margin-left: 40%;
+    width: 100%;
+    text-align: center;
     margin-top: 1.5%;
     text-transform: uppercase;
 }
-
 </style>

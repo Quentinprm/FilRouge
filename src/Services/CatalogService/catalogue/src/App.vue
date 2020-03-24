@@ -12,7 +12,7 @@ export default {
   name: 'App',
   components: {
     Header,
-    Main
+    Main   
   }
 }
 </script>
@@ -20,6 +20,5 @@ export default {
 <style>
 #app {
   display: flex;
-  position: relative;
 }
 </style>

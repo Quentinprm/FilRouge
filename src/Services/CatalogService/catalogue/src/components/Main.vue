@@ -168,9 +168,10 @@ export default {
 
 .header {
     text-transform: uppercase;
-    margin-left: 43.5%;
+    text-align: center;
     padding: 20px;
     font-size: 25px;
+    text-decoration: underline;
 }
 
 *{
