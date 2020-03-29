@@ -1,4 +1,4 @@
-verison:"3"
+version: '3'
 networks:
   default:
     driver: bridge
@@ -8,66 +8,61 @@ networks:
         - subnet: 192.168.0.1/24
     
 services:
+    identitydb:
+        image: identitydb
+        build: ./Services/IdentityService/db
+        networks:
+            - default
+        volumes:
+            - pgdata:/pgdata
+        ports: 
+            - "5432:5432"
+        environment: 
+            - POSTGRES_USER=docker
+            - POSTGRES_PASSWORD=docker
+            - POSTGRES_DB=identity
+            - PGDATA=/pgdata
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -h postgres-host -p 5432 -U postgres"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
 
-    sql.data: 
-        image: postgres
-        networks: 
-            -default
-    nosql.data: 
-        image: mongo
-        networks: 
-            -default
-    rabbitmq:
-        image: rabbitmq:3-management-alpine
-        networks: 
-            -default
-    catalog:
-        image: ${REGISTRY:-eshop}/catalog:${PLATFORM:-linux}-${TAG:-latest}
-        build: src/Services/CatalogService/Dockerfile
-        networks: 
-            -default
-        depend_on:
-            - nosql.data
-            - rabbitmq
-                
-    stock:
-        image: ${REGISTRY:-eshop}/stock:${PLATFORM:-linux}-${TAG:-latest}
-        build: src/Services/StockService/Dockerfile
-        depend_on:
-            - nosql.data
-            - rabbitmq
-        networks: 
-            -default 
-            
-    websiteapigw:
-        image: ${REGISTRY:-eshop}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
-        build: src/ApiGateways/ApiGw-Base/Dockerfile
+    identity:
+        image: identity
+        build: ./Services/IdentityService/src
+        networks:
+            - default      
+        ports:
+            - "8000:8000"
         depends_on:
-          - nosql.data
-          - sql.data
-          - rabbitmq
-          - catalog
-          - stock
-        networks: 
-            -default
-            
-    websiteagg:
-        image:${REGISTRY:-eshop}/websitegagg:${PLATFORM:-linux}-${TAG:-latest}
-        build: src/ApiGateways/Web.Bff.Shopping/aggregator/Dockerfile
-        networks: 
-            -default
-        depend_on:
-            - sql.data
-            - nosql.data
-            - rabbitmq
-            - catalog
-            - stock
-            
-    website: 
-        image: ${REGISTRY: -eshop}/website:${PLATFORM:-linux}-${TAG:-latest}
-        build: src/Web/Website/Dockerfile
-        networks: 
-            -default
-        depends_on:
-            -websiteagg
-            -websiteapigw
+            - identitydb
+        #command: ["./wait-for-postgres.sh", "identitydb:5432", "node", "server.js"]
+
+    #gatewaydb:
+        #image: gatewaydb
+        #build: ./Gateway/db
+        #networks: 
+            #- default
+        #volumes:
+            #- data:/data
+        #ports:
+            #- "6379:6379"
+        
+    #gateway: 
+        #image: gateway
+        #build: ./Gateway/src
+        #networks: 
+            #- default
+        #ports:
+            #- "8080:8080"
+            #- "8443:8443"
+            #- "9876:9876"
+        #depends_on: 
+            #- gatewaydb
+volumes: 
+    pgdata:
+        driver: local
+    #data:
+        #driver: local
+
