@@ -117,25 +117,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card_image-container">
-                            <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" />
-                        </div>
-                        <div class="card_content">
-                            <p class="card__title text--medium">
-                                Here's Title
-                            </p>
-                            <div class="card__info">
-                                <p class="card__price text--medium">
-                                    360€
-                                </p>
-                                <p class="card__bPanier text--medium">
-                                    Ajouter
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </section>
             </div>
         </div>
@@ -143,19 +124,18 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data () {
         return {
-            
+            info:null
         }
     },
-    methods: {
-        
-    },
-    computed: {
-        
-    },
-    mounted: {}
+    mounted(){
+        axios
+            .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+            .then(response => (this.info = response))
+    }
 }
 </script>
 
@@ -289,5 +269,17 @@ body{
     .card {
         grid-column-end: span 6;
     }
+}
+
+
+.product {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 240px;
+    height: 340px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .25);
+    border-radius: 5px;
 }
 </style>
