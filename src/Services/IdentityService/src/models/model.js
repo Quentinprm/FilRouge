@@ -15,10 +15,6 @@ User.init({
     sequelize,
     modelName: 'user'
 })
-/**const User = sequelize.define('utilisateur',{
-    identifiant: Sequelize.STRING,
-    mdp: Sequelize.STRING,
-});**/
 
 module.exports = {
     User
