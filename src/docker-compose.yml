@@ -38,7 +38,33 @@ services:
         depends_on:
             - identitydb
         #command: ["./wait-for-postgres.sh", "identitydb:5432", "node", "server.js"]
-
+    
+    catalogdb:
+        image: catalogdb
+        build: ./Services/CatalogService/db
+        ports:
+            - '2701:27017'
+        volumes:
+            - catalogdata:/data/db
+    catalog:
+        image: catalog
+        build: ./Services/CatalogService/src
+        networks: 
+            - default
+        ports:
+            - "8081:8081"
+        depends_on: 
+            - catalogdb
+    
+    website:
+        image: website
+        build: ./Web/WebSite
+        networks: 
+            - default
+        ports: 
+            - "8080:8080"
+        depends_on: 
+            - catalog
     #gatewaydb:
         #image: gatewaydb
         #build: ./Gateway/db
@@ -62,6 +88,8 @@ services:
             #- gatewaydb
 volumes: 
     pgdata:
+        driver: local
+    catalogdata:
         driver: local
     #data:
         #driver: local
