@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const authService = require('../services/auth');
 const userService = require('../services/user');
-
+/* Quentin Parmentier  */
 function register(req, res){
 	var login = req.body.login;
 	return userService.getUserByLogin(req.body.login || '')

@@ -1,3 +1,4 @@
+/* Quentin Parmentier  */
 const Type = require('../models/type');
 
 function getType(req,res){

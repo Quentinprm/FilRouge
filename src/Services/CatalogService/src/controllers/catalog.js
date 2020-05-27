@@ -1,6 +1,8 @@
+/* Quentin Parmentier  */
 const Product = require('../models/product');
 
 function getCatalog(req,res){
+        console.log("getCatalog");
         Product.find().exec()
         .then(products => {
             return res.send({

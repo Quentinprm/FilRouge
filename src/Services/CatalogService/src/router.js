@@ -1,3 +1,4 @@
+/* Quentin Parmentier  */
 const catalogController = require('./controllers/catalog');
 const productController = require('./controllers/product');
 const typeController = require('./controllers/type');

@@ -1,3 +1,4 @@
+/* Quentin Parmentier  */
 function CustomError(msg){
     this.type = 'custom';
     this.message = msg || '';

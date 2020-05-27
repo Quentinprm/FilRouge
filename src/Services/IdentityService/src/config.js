@@ -1,3 +1,4 @@
+/* Quentin Parmentier  */
 module.exports = {
     port:8000,
     dbName: 'identity',

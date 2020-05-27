@@ -1,3 +1,4 @@
+/* Quentin Parmentier  */
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -6,7 +7,14 @@ const router = require('./router');
 var mongoose = require('mongoose');
 const schedule = require('node-schedule');
 const app = express();
+var cors = require('cors');
 
+app.use(cors());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 mongoose.connect(config.dbAdress,{
     useMongoClient: true
