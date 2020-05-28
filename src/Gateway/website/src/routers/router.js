@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router()
 var catalogRouter = require('./catalogService')
-//var stockRouter = require('./stockService')
+var stockRouter = require('./stockService')
 
 router.use((req, res, next) => {
     console.log("Called: ", req.path)
@@ -10,6 +10,6 @@ router.use((req, res, next) => {
 })
 
 router.use(catalogRouter)
-//router.use(stockRouter)
+router.use(stockRouter)
 
 module.exports = router
