@@ -1,0 +1,11 @@
+image: docker
+services:
+  - docker:dind
+stages:
+  - deploy
+step-deploy-prod-api:
+  stage: deploy
+  script:
+    -'cd src'
+    - 'docker-compose down'
+    - 'docker-compose up -d'
