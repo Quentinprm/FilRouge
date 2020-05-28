@@ -52,7 +52,7 @@ body {
     position: fixed;
     width: 200px;
     height: 100%;
-    background-color: #4b4276;
+    background-color: #e0e0e0;
     padding: 30px 0;
     z-index: 1;
 }
@@ -70,12 +70,12 @@ body {
 }
 
 .sidebar ul li:hover {
-    background: #594f8d;
+    background: #cccccc;
 }
 
 
 .sidebar ul li a {
-    color: #bdb8d7;
+    color: red;
     display: block;
 }
 
@@ -83,7 +83,7 @@ body {
     position: fixed;
     width: 100%;
     height: 90px;
-    background-color: #4b4276;
+    background-color: #e0e0e0;
     margin-left: 200px;
     display: block;
     z-index: 1;
@@ -94,5 +94,6 @@ body {
     text-align: center;
     margin-top: 1.5%;
     text-transform: uppercase;
+    color: red;
 }
 </style>

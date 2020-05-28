@@ -162,7 +162,7 @@ export default {
 }
 
 body{
-    background-color: #303032;
+    background-color: #f4f4f4;
 }
 
 .info{
