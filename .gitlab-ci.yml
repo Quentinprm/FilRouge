@@ -6,6 +6,6 @@ stages:
 step-deploy-prod-api:
   stage: deploy
   script:
-    -'cd src'
+    - 'cd src'
     - 'docker-compose down'
     - 'docker-compose up -d'
