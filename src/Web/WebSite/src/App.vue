@@ -1,3 +1,4 @@
+<!--Nicolas Lardier-->
 <template>
   <div id="app">
     <Header />

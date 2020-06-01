@@ -1,3 +1,4 @@
+<!--Nicolas Lardier-->
 <template>
     <div>
         <div class="headBar">
