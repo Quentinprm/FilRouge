@@ -8,7 +8,7 @@ function updateDB(){
     var ParreDoucheId = mongoose.Types.ObjectId();
     var ParoiId = mongoose.Types.ObjectId();
     var ChemineeId = mongoose.Types.ObjectId();
-
+    console.log("try init db");
     Fixtures.reset();
 
     Fixtures({
@@ -137,7 +137,7 @@ function updateDB(){
             }
         ]
     },function(err,data){
-
+        console.log("error durring Catalog database init");
     });
 }
 module.exports = {

@@ -1,6 +1,21 @@
 <!--Nicolas Lardier-->
 <template>
     <div>
+        <div class="headBar">
+            <h2>Voir tout</h2>
+            <font-awesome-icon class="icon" icon="search" />
+            <font-awesome-icon class="icon" icon="shopping-bag" />
+        </div>
+        <div class="sidebar">
+            <img src="../assets/logoB.png">
+            <ul>
+                <li><a href="#">Voir tout</a></li>
+                <li><a href="#">Parre douche</a></li>
+                <li><a href="#">Paroi</a></li>
+                <li><a href="#">Cheminée</a></li>
+            </ul>
+        </div>
+
         <div class="main-content">
             <div class="header">Filtre</div>
             <div class="info">
@@ -11,106 +26,11 @@
                         </div>
                         <div class="card_content">
                             <p class="card__title text--medium">
-                                Here's Title
+                                Here's Title <!--libe-->
                             </p>
                             <div class="card__info">
                                 <p class="card__price text--medium">
-                                    360€
-                                </p>
-                                <p class="card__bPanier text--medium">
-                                    Ajouter
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card_image-container">
-                            <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" />
-                        </div>
-                        <div class="card_content">
-                            <p class="card__title text--medium">
-                                Here's Title
-                            </p>
-                            <div class="card__info">
-                                <p class="card__price text--medium">
-                                    360€
-                                </p>
-                                <p class="card__bPanier text--medium">
-                                    Ajouter
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card_image-container">
-                            <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" />
-                        </div>
-                        <div class="card_content">
-                            <p class="card__title text--medium">
-                                Here's Title
-                            </p>
-                            <div class="card__info">
-                                <p class="card__price text--medium">
-                                    360€
-                                </p>
-                                <p class="card__bPanier text--medium">
-                                    Ajouter
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card_image-container">
-                            <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" />
-                        </div>
-                        <div class="card_content">
-                            <p class="card__title text--medium">
-                                Here's Title
-                            </p>
-                            <div class="card__info">
-                                <p class="card__price text--medium">
-                                    360€
-                                </p>
-                                <p class="card__bPanier text--medium">
-                                    Ajouter
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card_image-container">
-                            <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" />
-                        </div>
-                        <div class="card_content">
-                            <p class="card__title text--medium">
-                                Here's Title
-                            </p>
-                            <div class="card__info">
-                                <p class="card__price text--medium">
-                                    360€
-                                </p>
-                                <p class="card__bPanier text--medium">
-                                    Ajouter
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card_image-container">
-                            <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" />
-                        </div>
-                        <div class="card_content">
-                            <p class="card__title text--medium">
-                                Here's Title
-                            </p>
-                            <div class="card__info">
-                                <p class="card__price text--medium">
-                                    360€
+                                    360€ <!--price-->
                                 </p>
                                 <p class="card__bPanier text--medium">
                                     Ajouter
@@ -125,24 +45,31 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {HTTP} from '../http-constants'
 export default {
     data () {
         return {
-            info:null
+            info:null,
+            errors:''
         }
     },
-    mounted(){
-        axios
-            .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-            .then(response => (this.info = response))
+    methods: {
+        getInfo: function () {
+            HTTP.get('')
+                .then(response => {
+                    this.info = response.data.libe
+                })
+                .catch(e => {
+                    this.errors = e
+                })
+        }
     }
 }
 </script>
 
 <style>
 .main-content {
-    width: 100%;
+    width: 80%;
     margin-left: 250px;
     margin-top: 5%;
 }
@@ -155,15 +82,59 @@ export default {
     text-decoration: underline;
 }
 
+.sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background-color: #e0e0e0;
+    padding: 30px 0;
+    z-index: 1;
+}
+
+.sidebar img {
+    margin-bottom: 30px;
+    width: 150px;
+    margin-left: 15px;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    border-top: 1px solid rgba(225,225,225,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.sidebar ul li:hover {
+    background: #cccccc;
+}
+
+
+.sidebar ul li a {
+    color: red;
+    display: block;
+}
+
+.headBar {
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    background-color: #e0e0e0;
+    margin-left: 200px;
+    display: block;
+    z-index: 1;
+}
+
+.headBar h2 {
+    width: 100%;
+    text-align: center;
+    margin-top: 1.5%;
+    text-transform: uppercase;
+    color: red;
+}
+
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    color: #ecf0f1;
-}
-
-body{
-    background-color: #f4f4f4;
 }
 
 .info{
@@ -192,7 +163,7 @@ body{
     grid-column-end: span 4;
     display: flex;
     flex-direction: column;
-    background-color: #39393b;
+    background-color: #39393b !important;
     cursor: pointer;
     transition: all 0.3s ease 0s;
     z-index: 0;
