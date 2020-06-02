@@ -20,21 +20,23 @@
             <div class="header">Filtre</div>
             <div class="info">
                 <section class="cards">
-                    <div class="card">
-                        <div class="card_image-container">
-                            <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" />
-                        </div>
-                        <div class="card_content">
-                            <p class="card__title text--medium">
-                                Here's Title <!--libe-->
-                            </p>
-                            <div class="card__info">
-                                <p class="card__price text--medium">
-                                    360€ <!--price-->
+                    <div v-for="cart in info">
+                        <div class="card">
+                            <div class="card_image-container">
+                                <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80" />
+                            </div>
+                            <div class="card_content">
+                                <p class="card__title text--medium">
+                                    {{ cart.libe }} <!--libe-->
                                 </p>
-                                <p class="card__bPanier text--medium">
-                                    Ajouter
-                                </p>
+                                <div class="card__info">
+                                    <p class="card__price text--medium">
+                                        {{ cart.price }} <!--price-->
+                                    </p>
+                                    <p class="card__bPanier text--medium">
+                                        Ajouter
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -45,23 +47,29 @@
 </template>
 
 <script>
+import api from '@/api';
+//const config = require('../../../../Gateway/website/src/config');// c'est ici que ça passe pas
+//const BASE_URL=config.catalogServiceAddr; 
+//const api = apiAdapter(BASE_URL);
+
 export default {
     data () {
         return {
-            info:null,
+            info:[],
             errors:''
         }
     },
-    methods: {
-        getInfo: function () {
-            HTTP.get('')
+    created () {
+        api.get('catalog')
                 .then(response => {
-                    this.info = response.data.libe
+                    //if(response.data != null && response.data.products != null){
+                        this.info = response.data  
+                        console.log(info)  
+                    //}
                 })
                 .catch(e => {
                     this.errors = e
                 })
-        }
     }
 }
 </script>
