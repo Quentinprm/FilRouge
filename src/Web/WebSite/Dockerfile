@@ -17,20 +17,5 @@
 # build app for production with minification
  RUN npm run build
 
-# EXPOSE 8080
+ EXPOSE 8080
  CMD [ "http-server", "dist" ]
-
-
-#FROM node:lts-alpine as develop-stage
-#WORKDIR /app
-#COPY . .
-#COPY package*.json ./
-#RUN npm install
-#FROM develop-stage as build-stage
-#RUN npm run serve 
-# production stage
-#FROM nginx:1.17.5-alpine as production-stage
-#COPY --from=build-stage /app/dist/spa /usr/share/nginx/html
-#COPY prod_nginx.conf /etc/nginx/nginx.conf
-#EXPOSE 80
-#CMD ["nginx", "-g", "daemon off;"]

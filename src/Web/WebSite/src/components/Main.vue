@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import {HTTP} from '../http-constants'
 export default {
     data () {
         return {
