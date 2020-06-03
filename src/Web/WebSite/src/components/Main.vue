@@ -48,9 +48,6 @@
 
 <script>
 import api from '@/api';
-//const config = require('../../../../Gateway/website/src/config');// c'est ici que ça passe pas
-//const BASE_URL=config.catalogServiceAddr; 
-//const api = apiAdapter(BASE_URL);
 
 export default {
     data () {
@@ -62,10 +59,9 @@ export default {
     created () {
         api.get('catalog')
                 .then(response => {
-                    //if(response.data != null && response.data.products != null){
-                        this.info = response.data  
-                        console.log(info)  
-                    //}
+                    if(response.data.data != null && response.data.data.products != null){
+                        this.info = response.data.data.products
+                    }
                 })
                 .catch(e => {
                     this.errors = e
