@@ -1,4 +1,4 @@
 export default{
-    gatewayUrl: "http://localhost:3000/"
+    gatewayUrl: "http://46.105.92.85:3000/"
 	//"http://websitegw:3000/",
 }

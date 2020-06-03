@@ -31,7 +31,7 @@
                                 </p>
                                 <div class="card__info">
                                     <p class="card__price text--medium">
-                                        {{ cart.price }} <!--price-->
+                                        {{ cart.price }}€ <!--price-->
                                     </p>
                                     <p class="card__bPanier text--medium">
                                         Ajouter
@@ -158,8 +158,8 @@ export default {
 .cards {
     grid-column: 2 / span 12;
     display: grid;
-    grid-template-columns: repeat(12,minmax(auto, 60px));
-    grid-gap: 40px;
+    grid-template-columns: repeat(3,minmax(auto, 300px));
+    grid-gap: 100px;
 }
 
 .card {
